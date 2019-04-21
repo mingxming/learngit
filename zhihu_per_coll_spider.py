@@ -36,3 +36,4 @@ if __name__ == '__main__':
     get_all_title(url,paper_num)
     #get_title(url)
     input("按回车结束")
+    #this is a new line
