@@ -1,10 +1,10 @@
 from bs4 import BeautifulSoup
 from lxml import html
 import xml
-import requests, json,time
+import requests, json,time,certifi
 def get_paper(url):
     kv={'user-agent':'Mozilla/5.0'}
-    f = requests.get(url,headers=kv,verify=False)
+    f = requests.get(url,headers=kv,verify=True)
     bf=BeautifulSoup(f.text,'lxml')
     bf.encoding=bf.apparent_encoding
     a1=bf.find_all('div',class_='zm-invite-pager')
@@ -14,7 +14,7 @@ def get_paper(url):
     
 def get_title(url):
     kv={'user-agent':'Mozilla/5.0'}
-    f = requests.get(url,headers=kv,verify=False)
+    f = requests.get(url,headers=kv,verify=True)
     bf=BeautifulSoup(f.text,'lxml')
     bf.encoding=bf.apparent_encoding
     h2=bf.find_all('h2',class_='zm-item-title')
@@ -24,17 +24,14 @@ def get_title(url):
                 print(i.text)
 def get_all_title(url,paper_num):
     a=1
-    for i in range(1,paper_num):
+    for i in range(1,paper_num+1):
                 url2=url+'?page={}'.format(i)
                 print(url2)
                 get_title(url2)
+                print('\n\n')
                 
-    
 if __name__ == '__main__':
     url=input("请输入url:")
     paper_num=get_paper(url)
     get_all_title(url,paper_num)
-    #get_title(url)
     input("按回车结束")
-    #this is a new line
-    #hello 13.30,4,21
