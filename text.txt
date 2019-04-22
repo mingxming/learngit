@@ -1,2 +1,3 @@
 this is line 1
-this is second time put
+this is second time putgit
+this is third  time charge
