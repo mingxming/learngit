@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup
 from lxml import html
 import xml
-import requests, json,time,certifi
+import requests, json,time,certifi,os
+cur_path=os.path.abspath(os.curdir)
 def get_paper(url):
     kv={'user-agent':'Mozilla/5.0'}
     f = requests.get(url,headers=kv,verify=True)
@@ -22,6 +23,8 @@ def get_title(url):
     a=a_bf.find_all('a')
     for i in a:
                 print(i.text)
+                with open(cur_path+'\\spider_data.txt','a+') as f:
+                    f.write(i.text+'\n')
 def get_all_title(url,paper_num):
     a=1
     for i in range(1,paper_num+1):
